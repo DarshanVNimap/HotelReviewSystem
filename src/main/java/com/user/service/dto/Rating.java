@@ -1,4 +1,6 @@
-package com.user.service.entity;
+package com.user.service.dto;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,9 +14,11 @@ import lombok.Setter;
 public class Rating {
 	
 	private Long id;
-	private Long ratingId;
 	private Long userId;
+	private Long hotelId;
 	private Float rating;
+	private Date reviewAt;	
 	private String feedback;
+	private Hotel hotel;
 
 }

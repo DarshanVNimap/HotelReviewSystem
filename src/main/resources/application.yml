@@ -1,5 +1,8 @@
-
+server:
+  port: 8002
 spring:
+  application:
+    name: USER-SERVICE
   datasource:
     url: jdbc:postgresql://localhost:5433/miuserservice
     password: root
@@ -11,3 +14,63 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        
+  config:
+    import: configserver:http://localhost:8006
+    
+    
+    
+# Circuit breaker config
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+        - health
+  endpoint:
+    health:
+      show-details: always
+      
+      
+resilience4j:
+  ratelimiter:
+    instances:
+      ratingHotelRateLimit:
+        limit-for-period: 5
+        limit-refresh-period: 4s
+        timeout-duration: 2s
+        
+        
+#  circuitbreaker:
+#    instances:
+#      ratingHotelBreaker:
+#       register-health-indicator: true
+#       event-consumer-buffer-size: 10
+#       failure-rate-threshold: 50
+#       minimum-number-of-calls: 5
+#       automatic-transition-from-open-to-half-open-enabled: true
+#       wait-duration-in-open-state: 10s
+#       permitted-number-of-calls-in-half-open-state: 3
+#       sliding-window-size: 10
+#       sliding-window-type: COUNT_BASED
+
+#  retry:
+#    instances:
+#      ratingHotelRetry:
+#        max-attempts: 3
+#        wait-duration: 2s
+
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8004/eureka
+    
+     

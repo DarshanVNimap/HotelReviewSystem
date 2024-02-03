@@ -19,6 +19,9 @@ public class UserDto {
 	@Email(message = "please enter valid email")
 	private String email;
 	
+	@NotBlank(message = "please enter password")
+	private String password;
+	
 	@Size(max = 255 , message = "about max length should be 255 character")
 	private String about;
 

@@ -3,6 +3,8 @@ package com.user.service.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.user.service.dto.Rating;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class UserEntity {
 	
 	private String name;
 	private String email;
+	private String password;
 	private String about;
 	
 	@Transient
